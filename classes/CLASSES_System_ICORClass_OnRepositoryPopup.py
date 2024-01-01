@@ -1,0 +1,105 @@
+# -*- coding: windows-1250 -*-
+# saved: 2020/11/02 21:15:56
+
+import sys
+from CLASSES_Library_ICORBase_Interface_ICORInterface import *
+import string
+
+def ICORMain(CID=-1, FieldName='', OID=-1, Value='', UID=-1):
+#   defaultres='opcja 1'+chr(255)+'opcja 2'
+#   print 'FieldName:',FieldName,'OID:',OID,'Value:',Value
+   InfoStatus(FieldName)
+   if aICORDBEngine.Variables._FOR_CLIENT_VERSION=='1':
+      CLIENT_VERSION=1
+   else:
+      CLIENT_VERSION=0
+   defaultres=[]
+   if FieldName=='None':
+      pass
+   elif FieldName=='Class':
+      defaultres=['Wszystkie obiekty','Poka¿ strukturê','Zestawienia','Szukaj','-']
+      if not CLIENT_VERSION:
+         defaultres.pop()
+         defaultres.extend(['PrzejdŸ do klasy','-','Nowe','\+','Klasa pochodna','Pole','Metoda','Obiekt','\-','Skasuj klasê','-','Replikacja','\+','Replikuj dane','Pobierz replikacjê','\-','Obs³uga','\+','SprawdŸ referencje','SprawdŸ obiekty w klasie s³ownikowej','Drukuj strukturê repozytorium','Ustaw kardynalnoœæ pól','Dodaj menu WWW dla edycji obiektów','Dodaj menu WWW dla kasowania obiektów','Dodaj menu WWW dla uruchamiania metod','Wyœwietl skrypt PG - create','Wyœwietl skrypt PG - select','Wyœwietl skrypt PG - select JSONB','-','Skasuj wszystkie obiekty','\-','Wyszukiwanie','\+','Tekst w metodach','\-']) #,'Tekst RE w metodach'
+      bclass=aICORDBEngine.Classes[OID]
+      if not bclass is None:
+         if bclass.IsFieldInClass('GeoInfo') and bclass.IsFieldInClass('GeoIndex'):
+            defaultres.extend(['Geo','\+','Import danych mapowych','Przeliczenie wartoœci','\-'])
+      defaultres.extend(['W³aœciwoœci pól','Formatuj'])
+   elif FieldName=='Field':
+      bclass=aICORDBEngine.Classes[OID]
+      if bclass is None:
+         return ''
+      afield=bclass.FieldsByName(Value)
+      if afield is None:
+         return ''
+      defaultres=['Poka¿ wartoœci',]
+      if not afield.ClassOfType is None:
+         defaultres.extend(['Typ pola',])
+      defaultres.extend(['Szukaj',])
+      if not CLIENT_VERSION:
+         defaultres.extend(['-',])
+         if not afield.ClassOfType is None:
+            defaultres.extend(['Nowe','\+','Referencja zwrotna do tej klasy','\-'])
+         defaultres.extend(['Skasuj pole','-','Obs³uga','\+','Zamieñ wartoœci pola'])
+         if not afield.ClassOfType is None:
+            defaultres.extend(['Skasuj puste referencje','Uzupe³nij pola UpdateRefs klasie s³ownikowej o BackRef'])
+         defaultres.extend(['Zapisz wartoœci archiwalne','Zapisz wszystkie wartoœci','Importuj wartoœci z katalogu','\-',])
+      defaultres.extend(['Formatuj',])
+   elif FieldName=='Method':
+      if not CLIENT_VERSION:
+         defaultres=['Uruchomienie metody','Edycja metody','Szukaj','-','Skasuj metodê','-','Obs³uga','\+','Zapisz wartoœci archiwalne','\-','Formatuj']
+   elif FieldName=='MenuItem':
+      pass
+   elif FieldName=='WWWServer':
+      defaultres=['Edycja',]
+   elif FieldName=='WWWIntroduction':
+      defaultres=['Edycja',]
+   elif FieldName=='WWWMenu':
+      defaultres=['Edycja',]
+   elif FieldName=='WWWMenuItem':
+      defaultres=['Edycja','-','Nowe','\+','Podpozycja','Pozycja przed','Zestawienie','Raport','\-','Wy³¹cz pozycjê','Przywróc widocznoœæ','-','Skasuj','-','Obs³uga','\+','Zaznacz zestawienia typu Worksheet','Od³¹cz mo¿liwoœæ edycji treœci','\-','XML','\+','Export XML podpozycji','Import XML podpozycji','\-','Opis HTML','\+','Edycja HTML','Zapamiêtaj','Otwórz','-','Czyœæ','\-','Treœæ HTML','\+','Edycja HTML','SprawdŸ treœæ','Generuj projekt HTML Help','Zapamiêtaj','Otwórz','-','Czyœæ','\-',]
+   elif FieldName=='WWWReportItem':
+      defaultres=['Edycja','PrzejdŸ do metody','-','Skasuj']
+   elif FieldName=='WWWSummaryItem':
+      defaultres=['Edycja',]
+      SummaryClass=aICORDBEngine.Classes['CLASSES_Library_NetBase_WWW_Dictionary_Report_SummaryInfo']
+      summoid=SummaryClass.Summary.ValuesAsInt(OID)
+      if summoid>=0:
+         defaultres.extend(['Poka¿ zestawienie','PrzejdŸ do klasy bazowej zestawienia',]) #'Duplikuj zestawienie'
+      if SummaryClass.CustomPageByMethod[OID]!='':
+         defaultres.extend(['PrzejdŸ do metody',])
+      defaultres.extend(['-','Skasuj'])
+   elif FieldName=='RFSServer':
+      defaultres=['Edycja',]
+   elif FieldName=='RFSCollection':
+      defaultres=['Edycja','Otwórz','-','Kasuj','-','Aktualizuj z dysku']
+   elif FieldName=='RFSItem':
+      defaultres=['Edycja','Uruchom','-','Kasuj','-']
+   elif FieldName=='StructureField':
+      defaultres=['Poka¿ w strukturze klas','Poka¿ wartoœci']
+      if not CLIENT_VERSION:
+         defaultres.extend(['Generuj kod','\+','Dostêp do wszystkich wartoœci pola','Dostêp do jednej wartoœci pola','\-'])
+   elif FieldName=='SecurityUserUser':
+      defaultres=['Edycja',]
+   elif FieldName=='SecurityGroupUser':
+      defaultres=['Edycja',]
+   elif FieldName=='SecurityAccessLevelUser':
+      defaultres=['Edycja',]
+   elif FieldName=='SecurityProfileGroupUser':
+      defaultres=['Edycja',]
+   elif FieldName=='GeoStructItem':
+      defaultres=['Edycja',]
+   elif FieldName=='GeoProject':
+      defaultres=['Edycja','Poka¿ GeoProject','Poka¿ GeoProject - GD','Czyœæ cache']
+   elif FieldName=='GeoLayer':
+      defaultres=['Edycja','Czyœæ cache']
+   elif FieldName=='EditorText':
+      defaultres=['Konwersje','\+','XML Encode','XML Decode','Py2HTML','Otwórz plik i dokonaj konwersji tabulatorów','\-']
+   elif FieldName=='HTMLEditorText':
+      defaultres=['Konwersje','\+','XML Encode','XML Decode','ISO2Win','Win2ISO','\-']
+   else:
+      pass
+   return string.join(defaultres,chr(255))
+
+

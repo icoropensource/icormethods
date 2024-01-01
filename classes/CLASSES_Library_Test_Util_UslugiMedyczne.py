@@ -1,0 +1,73 @@
+# -*- coding: windows-1250 -*-
+# saved: 2020/11/02 21:15:54
+
+from CLASSES_Library_ICORBase_Interface_ICORInterface import *
+
+uslugi=[
+   '10 % zni¿ki na szczepienia ochronne',
+   '10% na pozosta³e œwiadczenia medyczne (z wy³¹czeniem hospitalizacji)',
+   '10% zni¿ki na hospitalizacjê i konieczne zabiegi, w tym operacyjne',
+   '10% zni¿ki na pozosta³e œwiadczenia medyczne dla pracownika i najbli¿szych cz³onków jego rodziny (wspó³ma³¿onek i dzieci bêd¹ce na utrzymaniu)',
+   '15 % na pozosta³e œwiadczenia medyczne ( z wy³¹czeniem hospitalizacji)',
+   '15 % zni¿ki na wszystkie pozosta³e œwiadczenia medyczne',
+   '15% na szczepienia ochronne',
+   '15% zni¿ki na wszystkie inne œwiadczenia medyczne dla pracownika i najbli¿szych cz³onków jego rodziny ( wspó³ma³¿onek i dzieci bêd¹ce na utrzymaniu)',
+   '5 % zni¿ki na hospitalizacjê i konieczne zabiegi, w tym operacyjne',
+   '5% zni¿ki na leczenie hospitalizacyjne oraz konieczne zabiegi, w tym operacyjne',
+   'badania diagnostyczne: laboratoryjne, tomografia komputerowa, USG, RTG, EKG, mammografia, EEG,  Doppler, echo serca, Holter, endoskopia',
+   'badania wstêpne, okresowe  pracownika (badania lekarskie wraz z badaniami laboratoryjnymi i podstawowymi diagnostycznymi) zgodnie z wymogami Kodeksu Pracy dotycz¹cymi stanowiska pracy; wydanie zaœwiadczenia lekarskiego o zdolnoœci do pracy na danym stanowisku',
+   'badanie w kierunku osteoporozy; dla mê¿czyzn USG prostaty, badanie w kierunku osteoporozy badania diagnostyczne tomografia komputerowa, RTG,USG, EKG, Holter, Doppler, echo serca, endoskopia nielimitowana iloœæ podstawowych badañ laboratoryjnych',
+   'bezp³atna hospitalizacja do 5 dni w przypadku choroby lub postawienia diagnozy oraz 20 % zni¿ki na zabiegi operacyjne',
+   'dwa przegl¹dy stomatologiczne oraz dwa zabiegi zachowawcze',
+   'dwie nieodp³atne wizyty rocznie pracownika u dowolnie wybranego lekarza specjalisty',
+   'indywidualna asekuracja medyczna wszystkich wizyt i imprez danej firmy',
+   'jeden raz w roku badania pracownika wg potrzeb: kobiety mammografia lub USG, cytologia, badanie w kierunku osteoporozy; mê¿czyŸni USG prostaty, badanie w kierunku osteoporozy opieka ambulatoryjne raz w roku kompleksowy przegl¹d stanu zdrowia (bez stomatologii) pracownika i jednego cz³onka jego rodziny',
+   'konsultacje internistylekarz pierwszego kontaktu i lekarza przemys³owego',
+   'konsultacje u docentów i profesorów oraz konsultacje u lekarzy specjalistów',
+   'konsultacje u lekarzy specjalistów',
+   'monitoring stanu zdrowia pracownika',
+   'monitoring stanu zdrowia pracownika zaliczanego do grup szczególnego ryzyka',
+   'monitoring stanu zdrowia pracownika zaliczanego do grup szczególnego ryzyka konsultacje internisty – lekarz pierwszego kontaktu, lekarz przemys³owy',
+   'morfologia',
+   'najwy¿szy priorytet bezpieczeñstwa',
+   'najwy¿szy priorytet bezpieczeñstwa indywidualna asekuracja medyczna wszystkich wizyt i imprez danej firmy',
+   'nielimitowana iloœæ badañ laboratoryjnych',
+   'nielimitowana iloœæ podstawowych badañ laboratoryjnych',
+   'opieka ambulatoryjna cztery wizyty u lekarzy specjalistów',
+   'opieka ambulatoryjna',
+   'piêæ badañ diagnostycznych',
+   'pomoc medyczna przez 24 godziny na dobê',
+   'raz w roku kompleksowy przegl¹d stanu zdrowia',
+   'raz w roku kompleksowy przegl¹d stanu zdrowia dla ka¿dego cz³onka rodziny',
+   'raz w roku kompleksowy przegl¹d stanu zdrowia  dla pracownika i cz³onków rodziny, w tym dla kobietmammografia lub USG, cytologia,',
+   'raz w roku kompleksowy przegl¹d stanu zdrowia (bez stomatologii)',
+   'raz w roku kompleksowy przegl¹d stanu zdrowia (bez stomatologii) pracownika i jednego cz³onka rodziny',
+   'raz w roku przegl¹d stomatologiczny  i dwa zabiegi zachowawcze dla ka¿dego cz³onka rodziny',
+   'raz w roku przegl¹d stomatologiczny i jeden zabieg zachowawczy dla ka¿dego cz³onka rodziny',
+   'raz w roku przegl¹d stomatologiczny oraz dwa zabiegi zachowawcze',
+   'raz w roku w zale¿noœci od potrzeb badania: dla kobiet mammografia lub USG, cytologia, badanie w kierunku osteoporozy; dla mê¿czyzn USG prostaty, badanie w kierunku osteoporozy',
+   'szczepienia ochronne',
+   'œcis³a wspó³praca ze s³u¿bami BHP celem atestacji stanowisk pracy',
+   'terminarze godzinowe bez oczekiwania',
+   'terminarze godzinowe bez oczekiwania (uprawnienia do wszystkich œwiadczeñ w trybie priorytetowym)',
+   'transport medyczny w nag³ych przypadkach',
+   'trzy konsultacje u lekarzy specjalistów wg potrzeb',
+   'trzy nieodp³atne wizyty roczne pracownika u dowolnie wybranego specjalisty',
+   'uprawnienia do wszystkich œwiadczeñ w trybie priorytetowym, poza kolejnoœci¹',
+   'w zale¿noœci od potrzeb badania: tommografia komputerowa, RTG, Doppler, echo serca, USG, RTG, EKG, Holter, endoskopia – oraz kobiety mammografia lub USG, cytologia, badanie w kierunku osteoporozy; mê¿czyŸni USG prostaty, badanie w kierunku osteoporozy',
+   'wizyty domowe (internista, pediatra) w nag³ych przypadkach',
+   'wizyty domowe internistów – w nag³ych przypadkach',
+   'wizyty domowe lekarzy internistów – w nag³ych przypadkach',
+   'badanie internistyczne',
+   'badanie ogólne moczu',
+   'EKG',
+   'OB',
+   'wydanie zaœwiadczenia lekarskiego',
+   ]
+
+def ICORMain(CID=-1, FieldName='', OID=-1, Value='', UID=-1):
+   aclass=aICORDBEngine.Classes[CID]
+   return
+
+
+
